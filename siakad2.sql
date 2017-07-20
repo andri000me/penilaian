@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2017 at 05:11 PM
+-- Generation Time: Jul 20, 2017 at 05:11 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -147,8 +147,16 @@ INSERT INTO `jam_mengajar` (`id_jam_mengajar`, `jam_ke`, `jam_mengajar`) VALUES
 CREATE TABLE `jurusan` (
   `id_jurusan` int(11) NOT NULL,
   `nama_jurusan` varchar(255) NOT NULL,
-  `group_jurusan` varchar(20) NOT NULL
+  `group_jurusan` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jurusan`
+--
+
+INSERT INTO `jurusan` (`id_jurusan`, `nama_jurusan`, `group_jurusan`) VALUES
+(2, 'Teknik Mesin', ''),
+(3, 'Elektro', '');
 
 -- --------------------------------------------------------
 
@@ -159,8 +167,7 @@ CREATE TABLE `jurusan` (
 CREATE TABLE `kelas` (
   `id_kelas` int(11) NOT NULL,
   `nama_kelas` varchar(25) NOT NULL,
-  `nama_jurusan` varchar(255) NOT NULL,
-  `kelas_jurusan` varchar(255) NOT NULL,
+  `id_jurusan` int(11) NOT NULL,
   `wali_kelas` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -168,8 +175,9 @@ CREATE TABLE `kelas` (
 -- Dumping data for table `kelas`
 --
 
-INSERT INTO `kelas` (`id_kelas`, `nama_kelas`, `nama_jurusan`, `kelas_jurusan`, `wali_kelas`) VALUES
-(23, 'IPS I', 'IPS - 1', 'IPS I - IPS - 1', '212');
+INSERT INTO `kelas` (`id_kelas`, `nama_kelas`, `id_jurusan`, `wali_kelas`) VALUES
+(7, 'I', 2, '4211'),
+(8, 'I', 3, '798');
 
 -- --------------------------------------------------------
 
@@ -245,8 +253,8 @@ CREATE TABLE `tabel_pengajar` (
   `id_user` int(11) NOT NULL,
   `nip` int(11) NOT NULL,
   `nama_pengajar` varchar(255) NOT NULL,
-  `jabatan` varchar(255) NOT NULL,
-  `guru_bid_studi` varchar(255) NOT NULL,
+  `id_jabatan` int(11) NOT NULL,
+  `guru_bid_studi` varchar(255) DEFAULT NULL,
   `ttl_location` varchar(200) NOT NULL,
   `ttl_date` date NOT NULL,
   `phone` bigint(20) NOT NULL,
@@ -256,6 +264,18 @@ CREATE TABLE `tabel_pengajar` (
   `alamat` text NOT NULL,
   `agama` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tabel_pengajar`
+--
+
+INSERT INTO `tabel_pengajar` (`id_pengajar`, `id_user`, `nip`, `nama_pengajar`, `id_jabatan`, `guru_bid_studi`, `ttl_location`, `ttl_date`, `phone`, `gender`, `golongan_darah`, `email`, `alamat`, `agama`) VALUES
+(7, 999, 999, 'Matius Kalvin', 1, '', 'Neraka', '2017-07-04', 999, 'Laki-Laki', 'AB', 'asa@l.m', 'fafa', 'Konghucu'),
+(8, 123, 123, 'Apip Hariyanto', 7, 'IND', 'Serang', '2017-07-03', 879, 'Laki-Laki', 'O', 'apipsisfo@gmail.com', 'Bukit tiara blok f1/31 pasirjaya cikupa kab.tangerang', 'Islam'),
+(9, 456, 456, 'Alan Fauzi', 7, 'IPA', 'Tangerang', '2017-07-28', 8987, 'Laki-Laki', 'O', 'aaa@fdd.g', 'sds dsada dafdsf', 'Islam'),
+(10, 6768, 6768, 'Tiar Agisti', 7, 'TIK', 'Serang', '2017-07-18', 89, 'Laki-Laki', 'O', 'as@fdf.f', 'dsa sdsada', 'Hindu'),
+(11, 4211, 4211, 'Hans', 6, 'IPS', 'China', '2017-07-28', 800, 'Laki-Laki', 'AB', 'sa@sds', 'aaadadada', 'Konghucu'),
+(12, 798, 798, 'Anthony', 6, 'MTK', 'hongkong', '2017-07-13', 99, 'Laki-Laki', 'B', 'as@ds', 'add sad saa', 'Konghucu');
 
 -- --------------------------------------------------------
 
@@ -268,7 +288,7 @@ CREATE TABLE `tabel_siswa` (
   `id_user` int(11) NOT NULL,
   `nis` bigint(20) NOT NULL,
   `nama_siswa` varchar(255) NOT NULL,
-  `kelas` varchar(255) NOT NULL,
+  `id_kelas` int(11) NOT NULL,
   `ttl_location` varchar(255) NOT NULL,
   `ttl_date` date NOT NULL,
   `agama` varchar(200) NOT NULL,
@@ -277,10 +297,18 @@ CREATE TABLE `tabel_siswa` (
   `golongan_darah` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `alamat` text NOT NULL,
-  `angkatan` varchar(50) NOT NULL,
+  `angkatan` int(11) NOT NULL,
   `nama_ayah` varchar(255) NOT NULL,
   `nama_ibu` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tabel_siswa`
+--
+
+INSERT INTO `tabel_siswa` (`id_siswa`, `id_user`, `nis`, `nama_siswa`, `id_kelas`, `ttl_location`, `ttl_date`, `agama`, `phone`, `gender`, `golongan_darah`, `email`, `alamat`, `angkatan`, `nama_ayah`, `nama_ibu`) VALUES
+(1, 4535, 4535, 'Sani Handayani', 8, 'Tangerang', '2017-07-18', 'Islam', 979, 'Perempuan', 'B', 'as@asd', 'sdsd dsdsafddf', 12, 'asa', 'das'),
+(2, 56474, 56474, 'Alfi Fitriyanti', 7, 'Sukabumu', '2017-07-20', 'Islam', 8998, 'Perempuan', 'AB', 'ds@sd', 'faf fdaa', 12, 'sad', 'sdad');
 
 -- --------------------------------------------------------
 
@@ -290,17 +318,16 @@ CREATE TABLE `tabel_siswa` (
 
 CREATE TABLE `tahun_ajaran` (
   `id_thn_ajaran` int(11) NOT NULL,
-  `nama_tahun_ajaran` varchar(200) NOT NULL
+  `nama_tahun_ajaran` varchar(200) NOT NULL,
+  `flag` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tahun_ajaran`
 --
 
-INSERT INTO `tahun_ajaran` (`id_thn_ajaran`, `nama_tahun_ajaran`) VALUES
-(10, '2012/2013'),
-(11, '2013/2014'),
-(12, '2014/2015');
+INSERT INTO `tahun_ajaran` (`id_thn_ajaran`, `nama_tahun_ajaran`, `flag`) VALUES
+(12, '2017/2018', b'0');
 
 -- --------------------------------------------------------
 
@@ -323,9 +350,14 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `id_user`, `nama_user`, `hak_akses`, `username`, `password`) VALUES
 (1, 1, 'Apip', '1', 'admin', '21232f297a57a5a743894a0e4a801fc3'),
-(31, 212, 'an', '2', 'wali', '21232f297a57a5a743894a0e4a801fc3'),
-(35, 23, 'Nur', '2', '', '21232f297a57a5a743894a0e4a801fc3'),
-(36, 321, 'Alan', '3', 'alan', '21232f297a57a5a743894a0e4a801fc3');
+(3, 999, 'Matius Kalvin', '2', 'zz', '21232f297a57a5a743894a0e4a801fc3'),
+(4, 123, 'Apip Hariyanto', '2', '', '21232f297a57a5a743894a0e4a801fc3'),
+(5, 456, 'Alan Fauzi', '2', '', '21232f297a57a5a743894a0e4a801fc3'),
+(6, 6768, 'Tiar Agisti', '2', '', '21232f297a57a5a743894a0e4a801fc3'),
+(7, 4211, 'Hans', '2', '', '21232f297a57a5a743894a0e4a801fc3'),
+(8, 798, 'Anthony', '2', 'anthony', '21232f297a57a5a743894a0e4a801fc3'),
+(9, 4535, 'Sani Handayani', '3', '', '21232f297a57a5a743894a0e4a801fc3'),
+(10, 56474, 'Alfi Fitriyanti', '3', '', '21232f297a57a5a743894a0e4a801fc3');
 
 --
 -- Indexes for dumped tables
@@ -459,12 +491,12 @@ ALTER TABLE `jam_mengajar`
 -- AUTO_INCREMENT for table `jurusan`
 --
 ALTER TABLE `jurusan`
-  MODIFY `id_jurusan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_jurusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `mata_pelajaran`
 --
@@ -484,12 +516,12 @@ ALTER TABLE `tabel_nilai`
 -- AUTO_INCREMENT for table `tabel_pengajar`
 --
 ALTER TABLE `tabel_pengajar`
-  MODIFY `id_pengajar` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pengajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `tabel_siswa`
 --
 ALTER TABLE `tabel_siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tahun_ajaran`
 --
@@ -499,7 +531,7 @@ ALTER TABLE `tahun_ajaran`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

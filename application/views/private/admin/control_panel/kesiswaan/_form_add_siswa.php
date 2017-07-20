@@ -36,11 +36,11 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">Kelas - Jurusan</label>
       <div class="col-sm-10">
-        <select name="kelas" class="form-control" required="required">
+        <select name="id_kelas" class="form-control" required="required">
             <option value="">Pilih Kelas - Jurusan</option>
             <?php foreach ($kelas as $n): ?>
-            <option value="<?php echo $n['kelas_jurusan'];?>">
-              <?php echo $n['kelas_jurusan'];?>
+            <option value="<?php echo $n['id_kelas'];?>">
+              <?php echo $n['nama_kelas'];?> - <?php echo $n['nama_jurusan'];?>
             </option>
             <?php endforeach; ?>
         </select>
@@ -53,7 +53,7 @@
         <select name="tahun_ajaran" class="form-control" required="required">
             <option value="">Tahun Ajaran Baru</option>
             <?php foreach ($tahun_ajaran as $ta): ?>
-            <option value="<?php echo $ta['nama_tahun_ajaran'];?>">
+            <option value="<?php echo $ta['id_thn_ajaran'];?>">
               <?php echo $ta['nama_tahun_ajaran'];?>
             </option>
             <?php endforeach; ?>

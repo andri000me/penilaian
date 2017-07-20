@@ -101,10 +101,10 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">Jabatan</label>
       <div class="col-sm-10">
-      <select name="jabatan" class="form-control">
+      <select name="id_jabatan" class="form-control">
           <option value="">Pilih Jabatan</option>
           <?php foreach ($jabatan as $n): ?>
-          <option value=" <?php echo $n['nama_jabatan']; ?> "> <?php echo $n['nama_jabatan']; ?> </option>
+          <option value=" <?php echo $n['id_jabatan']; ?> "> <?php echo $n['nama_jabatan']; ?> </option>
           <?php endforeach; ?>            
       </select></div>
     </div>

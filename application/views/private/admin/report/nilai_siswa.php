@@ -38,7 +38,7 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12">
           <label class="label-siswa"> Kelas : </label>
-          <span> <?php echo $n['kelas']; ?> </span>
+          <span> <?php echo $n['nama_kelas']; ?> | <?php echo $n['nama_jurusan']; ?> </span>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12">

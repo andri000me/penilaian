@@ -22,13 +22,13 @@
         <div class="form-group has-success has-feedback">
           <div class="input-group">
             <span class="input-group-addon wd-addon">Nama Jurusan</span>
-            <select name="nama_jurusan" class="form-control" required="required">
+            <select name="id_jurusan" class="form-control" required="required">
 
               <option value="<?php echo $n['nama_jurusan'] ?>"><?php echo $n['nama_jurusan'] ?></option>
 
               <option value="">Pilih Jurusan</option>
               <?php foreach ($jurusan as $key_nj): ?>
-              <option value="<?php echo $key_nj['nama_jurusan']; ?> - <?php echo $key_nj['group_jurusan']; ?>"><?php echo $key_nj['nama_jurusan']; ?> - <?php echo $key_nj['group_jurusan']; ?></option>
+              <option value="<?php echo $key_nj['id_jurusan']; ?>"><?php echo $key_nj['nama_jurusan']; ?> - <?php echo $key_nj['group_jurusan']; ?></option>
               <?php endforeach; ?>
             </select>
           </div>
@@ -40,11 +40,11 @@
             <span class="input-group-addon wd-addon">Wali Kelas</span>
             <select name="wali_kelas" class="form-control" required="required">
 
-              <option value="<?php echo $n['wali_kelas']; ?>"><?php echo $n['wali_kelas']; ?></option>
+              <option value="<?php echo $n['wali_kelas']; ?>"><?php echo $n['wali_kelas']; ?> | <?php echo $n['nama_pengajar']; ?></option>
 
               <option value="Belum Ada Wali Kelas">Tentukan Wali Kelas</option>
               <?php foreach ($wali_kelas as $y): ?>
-              <option value="<?php echo $y['nip'] ?>"> <?php echo $y['nip'] ?> | <?php echo $y['nama_pengajar'] ?></option>
+              <option value="<?php echo $y['nip'] ?>"> <?php echo $y['nip']; ?> | <?php echo $y['nama_pengajar']; ?></option>
               <?php endforeach; ?>
             </select>
           </div>

@@ -13,7 +13,7 @@
         <div class="form-group has-success has-feedback">
           <div class="input-group">
             <span class="input-group-addon wd-addon">NIP</span>
-            <input name="nip" required="required" value="<?php echo $staff ['nip']; ?>" type="text" class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status">
+            <input name="nip" required="required" value="<?php echo $staff ['nip']; ?>" type="text" class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status" readonly>
           </div>
           <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
           <span id="inputSuccess2Status" class="sr-only">(success)</span>
@@ -110,7 +110,7 @@
           <div class="input-group">
             <span class="input-group-addon wd-addon">Jabatan</span>
             <select name="jabatan" class="form-control">
-              <option value="<?php echo $staff ['jabatan']; ?>"><?php echo $staff ['jabatan']; ?></option>
+              <option value="<?php echo $staff ['id_jabatan']; ?>"><?php echo $staff ['nama_jabatan']; ?></option>
               <option class="divider"> Pilih Jabatan </option>
               <?php foreach ($jabatan as $n): ?>
                 <option value="<?php echo $n['nama_jabatan']; ?>"> <?php echo $n['nama_jabatan']; ?> </option>

@@ -34,7 +34,7 @@ class Kelas extends MY_Controller {
             ),
 
           array (
-            'field'   =>  'nama_jurusan',
+            'field'   =>  'id_jurusan',
             'label'   =>  'kelas Jurusan',
             'rules'   =>  'required|trim'
             ),
@@ -60,9 +60,8 @@ class Kelas extends MY_Controller {
       } else {
         // Jika Tidak ada kesalahan, eksekusi perintah ini...
         $data_valid = array (
-            'nama_kelas'    => $this -> input -> post ('nama_kelas'),
-            'nama_jurusan'  => $this -> input -> post ('nama_jurusan'),
-            'kelas_jurusan' => $this -> input -> post ('nama_kelas') . " - " . $this -> input -> post ('nama_jurusan'),
+            'nama_kelas'    => $this -> input -> post ('nama_kelas'),       
+            'id_jurusan'    => $this -> input -> post ('id_jurusan'),
             'wali_kelas'    => $this -> input -> post ('wali_kelas')
           );
 
@@ -106,7 +105,7 @@ class Kelas extends MY_Controller {
             ),
 
           array (
-            'field'   =>  'nama_jurusan',
+            'field'   =>  'id_jurusan',
             'label'   =>  'kelas Jurusan',
             'rules'   =>  'required|trim'
             ),
@@ -133,8 +132,8 @@ class Kelas extends MY_Controller {
       // Jika Tidak ada kesalahan, eksekusi perintah ini...
         $data_valid = array (
             'nama_kelas'    => $this -> input -> post ('nama_kelas'),
-            'nama_jurusan'  => $this -> input -> post ('nama_jurusan'),
-            'kelas_jurusan' => $this -> input -> post ('nama_kelas') . " - " . $this -> input -> post ('nama_jurusan'),
+            // 'kelas_jurusan' => $this -> input -> post ('nama_kelas') . " - " . $this -> input -> post ('nama_jurusan'),
+            'id_jurusan' => $this -> input -> post ('id_jurusan'),
             'wali_kelas'    => $this -> input -> post ('wali_kelas')
         );
         $where = array('id_kelas' => $id_to_update);

@@ -2,6 +2,7 @@
 <?php $this->load->view('_templates/private/guru/head'); ?>
 <!-- End header -->
 <!-- Start Sections -->
+<div class="container">
 <h4>STAFF</h4>
 <div style="display: inline-block">
   
@@ -14,7 +15,7 @@
     <br>
 
     <label style="width: 100px">Jabatan</label>
-    <span><?php echo $wali_kelas['jabatan']; ?></span>
+    <span><?php echo $wali_kelas['nama_jabatan']; ?></span>
     <br>
 
     <label style="width: 100px">Bidang Studi</label>
@@ -30,7 +31,7 @@
       <th>No</th>
       <th>NIS</th>
       <th>Nama</th>
-      <th>Jurusan</th>
+      <th>Kelas & Jurusan</th>
       <th>L / P</th>
       <th>Phone</th>
     </tr>
@@ -43,7 +44,7 @@
       <td> <?php echo $no; ?> </td>    
       <td> <?php echo $value['nis']; ?> </td>    
       <td> <?php echo $value['nama_siswa']; ?> </td>    
-      <td> <?php echo $value['kelas']; ?> </td>    
+      <td> <?php echo $value ['nama_kelas']; ?> | <?php echo $value ['nama_jurusan']; ?></td>  
       <td> <?php echo $value['gender']; ?> </td>
       <td> <?php echo $value['phone']; ?> </td>
 
@@ -54,6 +55,7 @@
   endforeach; ?>
   </tbody>
 </table>
+</div>
 
 
 

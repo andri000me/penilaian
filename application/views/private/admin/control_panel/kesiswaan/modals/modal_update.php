@@ -13,7 +13,7 @@
         <div class="form-group has-success has-feedback">
           <div class="input-group">
             <span class="input-group-addon wd-addon">NIS</span>
-            <input name="nis" required="required" value="<?php echo $siswa ['nis']; ?>" type="text" class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status">
+            <input name="nis" required="required" value="<?php echo $siswa ['nis']; ?>" type="text" class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status" readonly>
           </div>
           <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
           <span id="inputSuccess2Status" class="sr-only">(success)</span>
@@ -106,11 +106,11 @@
         <div class="form-group has-success has-feedback">
           <div class="input-group">
             <span class="input-group-addon wd-addon">Kelas</span>
-              <select name="kelas" class="form-control" required="required">
-                  <option value="<?php echo $siswa['kelas']; ?>"><?php echo $siswa['kelas']; ?></option>
+              <select name="id_kelas" class="form-control" required="required">
+                  <option value="<?php echo $siswa['id_kelas']; ?>"><?php echo $siswa['nama_kelas']; ?> - <?php echo $siswa['nama_jurusan']; ?></option>
                   <?php foreach ($kelas as $n): ?>
-                  <option value="<?php echo $n['kelas_jurusan'];?>">
-                    <?php echo $n['kelas_jurusan'];?>
+                  <option value="<?php echo $n['id_kelas'];?>">
+                    <?php echo $n['nama_kelas'];?> - <?php echo $n['nama_jurusan'];?>
                   </option>
                   <?php endforeach; ?>
               </select>

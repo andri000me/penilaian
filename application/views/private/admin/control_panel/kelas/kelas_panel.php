@@ -18,10 +18,10 @@
   <div class="form-group">
     <label class="col-sm-2 control-label"> Nama Jurusan </label>
       <div class="col-sm-10">
-          <select name="nama_jurusan" class="form-control control-kelas" required="required">
+          <select name="id_jurusan" class="form-control control-kelas" required="required">
               <option value="">Pilih Jurusan</option>
               <?php foreach ($jurusan as $n): ?>
-              <option value="<?php echo $n['nama_jurusan'] ?> - <?php echo $n['group_jurusan'] ?>"><?php echo $n['nama_jurusan'] ?> - <?php echo $n['group_jurusan'] ?></option>
+              <option value="<?php echo $n['id_jurusan'] ?>"><?php echo $n['nama_jurusan'] ?> - <?php echo $n['group_jurusan'] ?></option>
               <?php endforeach; ?>
           </select>
       </div>              
@@ -59,7 +59,7 @@
 
     <tr>
       <td> <?php echo $no; ?> </td>
-      <td> <?php echo $n['kelas_jurusan']; ?></td>
+      <td> <?php echo $n['nama_jurusan']; ?> | <?php echo $n['nama_kelas']; ?> </td>
       <td> <?php echo $n['nip']; ?> | <?php echo $n['nama_pengajar']; ?>  </td>
       <td>
         <button class="btn btn-xs btn-warning" data-toggle="modal" data-target="#edit-<?php echo $n['id_kelas']; ?>" > <span> <i class="fa fa-pencil"></i></span>  Edit </button>

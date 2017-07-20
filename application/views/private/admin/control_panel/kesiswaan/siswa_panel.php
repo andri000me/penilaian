@@ -2,8 +2,6 @@
 <?php $this->load->view('_templates/private/admin/head'); ?>
 <!-- End header -->
 
-
-
 <!-- Start Sections -->
 <div class="cp-kesiswaan">
 <div class="panel panel-warning">

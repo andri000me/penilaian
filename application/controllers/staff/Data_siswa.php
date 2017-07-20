@@ -41,14 +41,25 @@ if ($var_a == false) {
     redirect( 'staff/dashboard' );
 } else {
     foreach ($var_a as $value) {
-      $var_class = $value['kelas_jurusan'];
+      $var_class = $value['id_kelas'];
     }
     // Data As Wali Kelas
     $ndata = $this->a_model->showMydataAsWaliKelas($data['nip']);
     $data['wali_kelas'] = $ndata[0];
 
     // Get Siswa By $var_class
-    $data['siswa_in_class'] = $this->db->query(" SELECT * FROM tabel_siswa WHERE kelas = '$var_class' ") -> result_array();
+    $data['siswa_in_class'] = $this->db->query(" 
+      SELECT a.*
+    , b.nama_kelas
+    , c.nama_jurusan
+    , e.nama_tahun_ajaran as angkatan
+    , d.nip
+    , d.nama_pengajar as wali_kelas
+    FROM tabel_siswa as a
+    left join kelas as b on a.id_kelas =  b.id_kelas
+    left join jurusan as c on b.id_jurusan = c.id_jurusan
+    left join tabel_pengajar as d on b.wali_kelas = d.nip
+    left join tahun_ajaran as e on a.angkatan = e.id_thn_ajaran WHERE b.id_kelas = '$var_class' ") -> result_array();
 }
 
  

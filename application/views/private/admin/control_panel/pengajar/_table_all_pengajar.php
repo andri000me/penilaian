@@ -5,11 +5,10 @@
             <tr>
                 <th>NIP</th>
                 <th>Nama Pengajar / Guru</th>
-                <th>TTL</th>
-                <th>HP</th>
+                <th>Jabatan</th>
+                <th>Bidang Studi</th>
                 <th>L/P</th>
                 <th>Email</th>
-                <th>Alamat</th>
                 <th> &nbsp; </th>
                 <th>Aktivasi</th>
             </tr>
@@ -19,11 +18,10 @@
             <tr>
                 <th>NIP</th>
                 <th>Nama Pengajar / Guru</th>
-                <th>TTL</th>
-                <th>HP</th>
+                <th>Jabatan</th>
+                <th>Bidang Studi</th>
                 <th>L/P</th>
                 <th>Email</th>
-                <th>Alamat</th>
                 <th> &nbsp; </th>
                 <th>Aktivasi</th>
             </tr>
@@ -38,11 +36,10 @@
                         <?php echo $staff ['nama_pengajar']; ?>
                      </a>
                 </td>
-                <td> <?php echo $staff ['ttl_location'] ?> </td>
-                <td> +62 <?php echo $staff ['phone'] ?> </td>
+                <td> <?php echo $staff ['nama_jabatan'] ?> </td>
+                <td> <?php echo $staff ['guru_bid_studi'] ?> </td>
                 <td> <?php echo $staff ['gender'] ?> </td>
                 <td> <?php echo $staff ['email'] ?> </td>
-                <td> <?php echo $staff ['alamat'] ?> </td>
                 <td>
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit-<?php echo $staff['id_pengajar']; ?>"> <i class="fa fa-pencil-square-o"></i> </button>
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<?php echo $staff['id_pengajar']; ?>"> <i class="fa fa-trash-o"></i></button>

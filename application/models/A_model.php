@@ -60,17 +60,21 @@ class A_model extends CI_Model {
   // ------------------------------------------------------------
   // Query Get ByStaff
   function getByStaff($param) {
-    $query = $this -> db -> where ('nip', $param)
+    $query = $this -> db -> select ('*')
+                         -> from ('tabel_pengajar')
+                         -> join ('jabatan', 'tabel_pengajar.id_jabatan = jabatan.id_jabatan', 'left')
+                         -> join ('mata_pelajaran', 'tabel_pengajar.guru_bid_studi = mata_pelajaran.kode_mapel', 'left')
+                         -> where ('nip', $param)
                          -> limit (1)
-                         -> get   ('tabel_pengajar');
+                         -> get   ();
     return $query -> result_array();
   }
 
   // ------------------------------------------------------------
   // Query Get Jabatan sebagai WaliKelas
   function getByWaliKelas() {
-    $n = "Wali Kelas"; // Ini Nama Jabatan
-    $query = $this -> db -> where ('jabatan', $n)
+    $n = 6; // Ini Nama Jabatan
+    $query = $this -> db -> where ('id_jabatan', $n)
                          -> get   ('tabel_pengajar');
     return $query -> result_array();
   }
@@ -78,41 +82,75 @@ class A_model extends CI_Model {
   // ------------------------------------------------------------
   // Query Get Siswa
   function getSiswa() {
-    $query = $this -> db -> query (' SELECT * FROM `tabel_siswa` ORDER BY `tabel_siswa`.`nama_siswa` ASC ');
+    $query = $this->db->select ('*')
+                      ->from   ('tabel_siswa')
+                      ->join   ('kelas', 'tabel_siswa.id_kelas = kelas.id_kelas', 'left')
+                      ->join   ('jurusan', 'kelas.id_jurusan = jurusan.id_jurusan', 'left')
+                      ->join   ('tahun_ajaran', 'tabel_siswa.angkatan = tahun_ajaran.id_thn_ajaran', 'left')
+                      ->join('users', 'users.id_user = tabel_siswa.id_user', 'left')
+                      ->order_by ('nama_siswa', 'ASC')
+                      ->get    ();
     return $query -> result_array();
+
   }
 
   // ------------------------------------------------------------
   // Query Get BySiswa
   function getBySiswa($param) {
-    $query = $this -> db -> where ('nis', $param)
+    $query = $this -> db -> select ('*')
+                         -> from ('tabel_siswa')
+                         -> join ('kelas', 'tabel_siswa.id_kelas = kelas.id_kelas', 'left')
+                         -> join   ('jurusan', 'kelas.id_jurusan = jurusan.id_jurusan', 'left')
+                         -> join   ('tahun_ajaran', 'tabel_siswa.angkatan = tahun_ajaran.id_thn_ajaran', 'left')
+                         -> where ('nis', $param)
                          -> limit (1)
-                         -> get   ('tabel_siswa');
+                         -> get   ();                       
     return $query -> result_array();
   }
 
   // ------------------------------------------------------------
   // Get Kelas
   function getKelas() {
-    $query = $this->db->query('SELECT * FROM `kelas` ORDER BY `kelas`.`nama_kelas` ASC');
-    return $query->result_array();
+    // $query = $this->db->query('SELECT * FROM `kelas` ORDER BY `kelas`.`nama_kelas` ASC');
+    // return $query->result_array();
+      $query = $this->db->select ('*')
+                      ->from   ('kelas')
+                      ->join   ('jurusan', 'kelas.id_jurusan = jurusan.id_jurusan', 'left')
+                      ->order_by ('nama_jurusan', 'ASC')
+                      ->get    ();
+    return $query -> result_array();
   }
 
   // ------------------------------------------------------------
   // Get Kelas
+  // function getMyClass($nip) {
+  //   $query = $this->db->query("SELECT * FROM `kelas` WHERE wali_kelas = '$nip' ORDER BY `kelas`.`nama_kelas` ASC");
+  //   return $query->result_array();
+  // }
+
   function getMyClass($nip) {
-    $query = $this->db->query("SELECT * FROM `kelas` WHERE wali_kelas = '$nip' ORDER BY `kelas`.`nama_kelas` ASC");
-    return $query->result_array();
+       $query = $this->db->select ('*')
+                      ->from   ('tabel_siswa')
+                      ->join   ('kelas', 'tabel_siswa.id_kelas = kelas.id_kelas', 'left')
+                      ->join ('jurusan', 'kelas.id_jurusan = jurusan.id_jurusan', 'left')
+                      ->join ('tabel_pengajar', 'kelas.wali_kelas = tabel_pengajar.nip', 'left')
+                      ->join ('tahun_ajaran', 'tabel_siswa.angkatan = tahun_ajaran.id_thn_ajaran')
+                      ->order_by ('nama_jurusan', 'ASC')
+                      ->get    ();
+       return $query -> result_array();
   }
 
   // ------------------------------------------------------------
   function getTabPengajar_join_kelas() {
     // Get Join Tabel Pengajar with tabel kelas
-    $query = $this->db->select ('*')
-                      ->from   ('tabel_pengajar')
-                      ->join   ('kelas', 'kelas.wali_kelas = tabel_pengajar.nip', 'left')
-                      ->where  ('jabatan', 'Wali Kelas')
-                      ->order_by ('nama_kelas', 'ASC')
+
+     $query = $this->db->select ('*')
+                      ->from   ('kelas')
+                      ->join   ('jurusan', 'kelas.id_jurusan = jurusan.id_jurusan', 'left')
+                      ->join   ('tabel_pengajar', 'kelas.wali_kelas = tabel_pengajar.nip', 'left')
+                      // ->join   ('jabatan', 'tabel_pengajar.id_jabatan = jabatan.id_jabatan', 'left')
+                      // ->where  ('id_jabatan', 6)
+                      // ->order_by ('nama_jurusan', 'ASC')
                       ->get    ();
     return $query -> result_array();
   }
@@ -122,6 +160,7 @@ class A_model extends CI_Model {
     // Get Join Tabel Pengajar with tabel kelas
     $query = $this->db->select ('*')
                       ->from   ('tabel_pengajar')
+                      ->join   ('jabatan', 'tabel_pengajar.id_jabatan = jabatan.id_jabatan', 'left')
                       ->where  ('nip', $nip)
                       ->get    ();
     return $query -> result_array();
@@ -243,6 +282,8 @@ class A_model extends CI_Model {
   function getUsers_join_staff() {
     $query = $this->db->select('*')
                       ->from('tabel_pengajar')
+                      ->join('jabatan', 'tabel_pengajar.id_jabatan = jabatan.id_jabatan', 'left')
+                      ->join('mata_pelajaran', 'tabel_pengajar.guru_bid_studi = mata_pelajaran.kode_mapel', 'left')
                       ->join('users', 'users.id_user = tabel_pengajar.id_user', 'left')
                       ->get();
     return $query -> result_array();
@@ -265,9 +306,11 @@ class A_model extends CI_Model {
     // Report Data Siswa
     $query = $this->db->select('*')
                       ->from('kelas')
-                      ->join('tabel_siswa', 'tabel_siswa.kelas = kelas.kelas_jurusan', 'left')
+                      ->join('tabel_siswa', 'tabel_siswa.id_kelas = kelas.id_kelas', 'left')
                       ->join('tabel_pengajar', 'tabel_pengajar.nip = kelas.wali_kelas', 'left')
-                      ->where('tabel_pengajar.jabatan', 'Wali Kelas')
+                      ->join('tahun_ajaran', 'tabel_siswa.angkatan = tahun_ajaran.id_thn_ajaran', 'left')
+                      ->join('jurusan', 'kelas.id_jurusan = jurusan.id_jurusan', 'left')
+                      ->where('tabel_pengajar.id_jabatan', 6)
                       ->where('tabel_siswa.angkatan', $filter_tahun_ajaran)
                       ->get();
     return $query -> result_array();

@@ -8,13 +8,13 @@
 
 <?php echo form_open('administrator/report/siswa'); ?>
 
-Tahun Angkatan : <?php echo $filter; ?> <br>
+<!-- Tahun Angkatan : <?php echo $filter; ?> <br> -->
       <select name="tahun_angkatan">
-          <option value="<?php echo $filter; ?>"><?php echo $filter; ?></option>
+          <!-- <option value="<?php echo $filter; ?>"><?php echo $filter; ?></option> -->
           
-          <option value="Pilih Angkatan" class="divider">---------------</option>
+          <option value="Pilih Angkatan" class="divider">Pilih Tahun Ajaran</option>
           <?php foreach ($tahun_angkatan as $value): ?>
-          <option value="<?php echo $value['nama_tahun_ajaran']; ?>"><?php echo $value['nama_tahun_ajaran']; ?></option>
+          <option value="<?php echo $value['id_thn_ajaran']; ?>"><?php echo $value['nama_tahun_ajaran']; ?></option>
           <?php endforeach; ?>
 
       </select>
@@ -42,14 +42,14 @@ Tahun Angkatan : <?php echo $filter; ?> <br>
 
         <td> <?php echo $no; ?> </td>
         <td> <?php echo $siswa ['nis'] ?> </td>
-        <td> <?php echo $siswa ['angkatan'] ?> </td>
+        <td> <?php echo $siswa ['nama_tahun_ajaran'] ?> </td>
         <td> <a href="javascript:;" target="popup" onclick="window.open('<?php echo base_url() . 'administrator/report/nilai/'. $siswa ['nis']; ?>','name','width=auto,height=auto')">
               <span class="btn btn-xs btn-primary"> <i class="fa fa-search-plus"></i> </span>
               <?php echo $siswa ['nama_siswa']; ?>
               </a>
         </td>
         <td> <?php echo $siswa ['gender']; ?> </td>
-        <td> <?php echo $siswa ['kelas']; ?> </td>
+        <td> <?php echo $siswa ['nama_kelas']; ?> | <?php echo $siswa ['nama_jurusan']; ?></td>
 
       </tr>
       <?php $no++ ?>

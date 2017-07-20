@@ -34,8 +34,7 @@ class Jurusan extends MY_Controller {
 
             array(
               'field'   =>  'group_jurusan',
-              'label'   =>  'Nama Jurusan',
-              'rules'   =>  'required|trim'
+              'label'   =>  'Nama Jurusan'           
             )
         );
 

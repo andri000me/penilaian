@@ -24,5 +24,5 @@
   <body class="container">
 
   <!-- Navigations -->
-  <?php $this->load->view('_layouts/public/nav'); ?>
+
   

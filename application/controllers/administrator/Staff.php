@@ -77,7 +77,7 @@ class Staff extends MY_Controller {
             ),
 
           array (
-            'field'   =>  'jabatan',
+            'field'   =>  'id_jabatan',
             'label'   =>  'Jabatan',
             'rules'   =>  'trim'
             ),
@@ -127,7 +127,7 @@ class Staff extends MY_Controller {
               'golongan_darah' => $this -> input -> post ('golongan_darah'),
               'email'          => $this -> input -> post ('email'),
               'alamat'         => $this -> input -> post ('alamat'),
-              'jabatan'        => $this -> input -> post ('jabatan'),
+              'id_jabatan'     => $this -> input -> post ('id_jabatan'),
               'agama'          => $this -> input -> post ('agama'),
               'guru_bid_studi' => $this -> input -> post ('guru_bid_studi')
             );
@@ -231,7 +231,7 @@ class Staff extends MY_Controller {
             ),
 
           array (
-            'field'   =>  'jabatan',
+            'field'   =>  'id_jabatan',
             'label'   =>  'Jabatan',
             'rules'   =>  'trim'
             ),
@@ -264,7 +264,7 @@ class Staff extends MY_Controller {
             'golongan_darah' => $this -> input -> post ('golongan_darah'),
             'email'          => $this -> input -> post ('email'),
             'alamat'         => $this -> input -> post ('alamat'),
-            'jabatan'        => $this -> input -> post ('jabatan'),
+            'id_jabatan'     => $this -> input -> post ('id_jabatan'),
             'agama'          => $this -> input -> post ('agama'),
             'guru_bid_studi' => $this -> input -> post ('guru_bid_studi')
           );

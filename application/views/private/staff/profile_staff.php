@@ -3,7 +3,7 @@
 <!-- End header -->
 
 
-
+<br />
 <!-- Start Sections -->
 <div class="cp-kesiswaan">
   <div class="panel panel-primary">
@@ -35,7 +35,7 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
           <label class="label-staff"> Jabatan : </label>
-          <span> <?php echo $n['jabatan']; ?> </span>
+          <span> <?php echo $n['nama_jabatan']; ?> </span>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12">

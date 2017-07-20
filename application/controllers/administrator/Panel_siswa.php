@@ -15,11 +15,11 @@ class Panel_siswa extends MY_Controller {
   // -----------------------------------------------------------------------
   // Functions index
   public function index() {
-    // $data['siswa']     = $this -> a_model -> getSiswa();
+    $data['siswa']     = $this -> a_model -> getSiswa();
     $data['kelas']        = $this -> a_model -> getKelas();
     $data['jurusan']      = $this -> a_model -> getJurusan();
     $data['tahun_ajaran'] = $this -> a_model -> getTahunAjaran();
-    $data['siswa']        = $this -> a_model -> getUsers_join_siswa();
+    //$data['siswaSet']        = $this -> a_model -> getUsers_join_siswa();
     $data['myAccount']    = $this->session->userdata('nama_awal');
     $this -> load -> view('private/admin/control_panel/kesiswaan/siswa_panel', $data);
   } /* End Index */
@@ -54,7 +54,7 @@ class Panel_siswa extends MY_Controller {
             ),
 
           array (
-            'field'   =>  'kelas',
+            'field'   =>  'id_kelas',
             'label'   =>  'Kelas',
             'rules'   =>  'required|trim'
             ),
@@ -144,7 +144,7 @@ class Panel_siswa extends MY_Controller {
                 'nama_siswa'     => $this -> input -> post ('nama_siswa'),
                 'nama_ayah'      => $this -> input -> post ('nama_ayah'),
                 'nama_ibu'       => $this -> input -> post ('nama_ibu'),
-                'kelas'          => $this -> input -> post ('kelas'),
+                'id_kelas'       => $this -> input -> post ('id_kelas'),
                 'angkatan'       => $this -> input -> post ('tahun_ajaran'),
                 'ttl_location'   => $this -> input -> post ('ttl_location'),
                 'ttl_date'       => $this -> input -> post ('ttl_date'),
@@ -227,7 +227,7 @@ class Panel_siswa extends MY_Controller {
             ),
 
           array (
-            'field'   =>  'kelas',
+            'field'   =>  'id_kelas',
             'label'   =>  'Kelas',
             'rules'   =>  'required|trim'
             ),
@@ -298,7 +298,7 @@ class Panel_siswa extends MY_Controller {
             'nama_siswa'     => $this -> input -> post ('nama_siswa'),
             'nama_ayah'      => $this -> input -> post ('nama_ayah'),
             'nama_ibu'       => $this -> input -> post ('nama_ibu'),
-            'kelas'          => $this -> input -> post ('kelas'),
+            'id_kelas'          => $this -> input -> post ('id_kelas'),
             'angkatan'       => $this -> input -> post ('tahun_angkatan'),
             'ttl_location'   => $this -> input -> post ('ttl_location'),
             'ttl_date'       => $this -> input -> post ('ttl_date'),
