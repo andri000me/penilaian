@@ -2,21 +2,23 @@
 <?php $this->load->view('_templates/private/guru/head'); ?>
 <!-- End header -->
 <!-- Start Sections -->
+<div class="container">
   <h3>INPUT NILAI || Controll Data Nilai</h3><hr>
   <div class="jumbotron">
           <div class="form-horizontal" style="display: inline-block; margin-right: 20px">
             <label for="">Pilih Kelas</label>
-            <select id="sKelas" class="form-control" name="kelas">
+            <select id="sKelas" class="form-control" name="id_kelas">
+                <option value="">Pilih Kelas</option>
               <?php foreach ($kelas as $n): ?>
-                <option value="<?php echo $n['kelas_jurusan']; ?>"> <?php echo $n['kelas_jurusan']; ?> </option>
+                <option value="<?php echo $n['id_kelas']; ?>"> <?php echo $n['nama_kelas']; ?> - <?php echo $n['nama_jurusan']; ?> </option>
               <?php endforeach; ?>
             </select>
           </div>
           <div class="form-horizontal" style="display: inline-block; margin-right: 20px">
             <label for="">Tahun Ajaran</label>
-            <select id="sTa" class="form-control" name="tahun_ajaran" required="required">
+            <select id="sTa" class="form-control" name="id_thn_ajaran" required="required">
               <?php foreach ($tahun_ajaran as $ta): ?>
-                <option value="<?php echo $ta['nama_tahun_ajaran']; ?>"><?php echo $ta['nama_tahun_ajaran']; ?></option>
+                <option value="<?php echo $ta['id_thn_ajaran']; ?>"><?php echo $ta['nama_tahun_ajaran']; ?></option>
               <?php endforeach; ?>
             </select>
           </div>
@@ -86,6 +88,7 @@
             </tbody>
     </table>
     <?php echo form_close(); ?>
+</div>
 </div>
 <!-- End View Table Nilai -->
 <?php $this->load->view('_templates/private/guru/footer'); ?>

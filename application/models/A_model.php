@@ -116,7 +116,9 @@ class A_model extends CI_Model {
       $query = $this->db->select ('*')
                       ->from   ('kelas')
                       ->join   ('jurusan', 'kelas.id_jurusan = jurusan.id_jurusan', 'left')
+                      ->join   ('tabel_pengajar', 'kelas.wali_kelas = tabel_pengajar.nip', 'left')
                       ->order_by ('nama_jurusan', 'ASC')
+                      ->limit (1)
                       ->get    ();
     return $query -> result_array();
   }
@@ -135,6 +137,7 @@ class A_model extends CI_Model {
                       ->join ('jurusan', 'kelas.id_jurusan = jurusan.id_jurusan', 'left')
                       ->join ('tabel_pengajar', 'kelas.wali_kelas = tabel_pengajar.nip', 'left')
                       ->join ('tahun_ajaran', 'tabel_siswa.angkatan = tahun_ajaran.id_thn_ajaran')
+                      ->where ('nip', $nip)
                       ->order_by ('nama_jurusan', 'ASC')
                       ->get    ();
        return $query -> result_array();
@@ -159,7 +162,9 @@ class A_model extends CI_Model {
   function showMydataAsWaliKelas($nip) {
     // Get Join Tabel Pengajar with tabel kelas
     $query = $this->db->select ('*')
-                      ->from   ('tabel_pengajar')
+                      ->from   ('tabel_siswa')
+                      ->join   ('kelas', 'tabel_siswa.id_kelas = kelas.id_kelas', 'left')
+                      ->join   ('tabel_pengajar', 'kelas.wali_kelas = tabel_pengajar.nip')
                       ->join   ('jabatan', 'tabel_pengajar.id_jabatan = jabatan.id_jabatan', 'left')
                       ->where  ('nip', $nip)
                       ->get    ();
