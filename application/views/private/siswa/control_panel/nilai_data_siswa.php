@@ -10,7 +10,7 @@
   <br>
   Nama : <?php echo $ds['nama_siswa']; ?>
   <br>
-  Kelas & Jurusan : <?php echo $ds['kelas']; ?>
+  Kelas & Jurusan : <?php echo $ds['nama_kelas']; ?> - <?php echo $ds['nama_jurusan']; ?>
   <hr>
   <?php endforeach; ?>
 
@@ -39,7 +39,7 @@
     <?php foreach ($by_nilai_siswa as $field): ?>
       
       <tr>
-        <td><?php echo $field['mata_pelajaran']; ?></td>
+        <td><?php echo $field['nama_mapel']; ?></td>
         <td><?php echo $field['tugas']; ?></td>
         <td><?php echo $field['uts']; ?></td>
         <td><?php echo $field['uas']; ?></td>

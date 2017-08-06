@@ -59,7 +59,7 @@ if ($var_a == false) {
     left join kelas as b on a.id_kelas =  b.id_kelas
     left join jurusan as c on b.id_jurusan = c.id_jurusan
     left join tabel_pengajar as d on b.wali_kelas = d.nip
-    left join tahun_ajaran as e on a.angkatan = e.id_thn_ajaran WHERE b.id_kelas = '$var_class' ") -> result_array();
+    left join tahun_ajaran as e on a.id_thn_ajaran = e.id_thn_ajaran WHERE b.id_kelas = '$var_class' ") -> result_array();
 }
 
  

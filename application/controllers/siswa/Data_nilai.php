@@ -37,7 +37,7 @@ class Data_nilai extends MY_Controller {
     /*************************************************************/
     // Get Nama Wali Kelas
     foreach ($data['profile'] as $value) {
-      $key_kelas   = $value['kelas']; // Get Nama Kelas from tabel siswa
+      $key_kelas   = $value['id_kelas']; // Get Nama Kelas from tabel siswa
     }
     $data_kelas = $this -> a_model -> getNama_Wali_Kelas($key_kelas);
     foreach ($data_kelas as $field) {

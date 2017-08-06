@@ -7,7 +7,7 @@
   <div class="jumbotron">
           <div class="form-horizontal" style="display: inline-block; margin-right: 20px">
             <label for="">Pilih Kelas</label>
-            <select id="sKelas" class="form-control" name="id_kelas">
+            <select id="sKelas" class="form-control" name="kelas">
                 <option value="">Pilih Kelas</option>
               <?php foreach ($kelas as $n): ?>
                 <option value="<?php echo $n['id_kelas']; ?>"> <?php echo $n['nama_kelas']; ?> - <?php echo $n['nama_jurusan']; ?> </option>
@@ -16,7 +16,7 @@
           </div>
           <div class="form-horizontal" style="display: inline-block; margin-right: 20px">
             <label for="">Tahun Ajaran</label>
-            <select id="sTa" class="form-control" name="id_thn_ajaran" required="required">
+            <select id="sTa" class="form-control" name="tahun_ajaran" required="required">
               <?php foreach ($tahun_ajaran as $ta): ?>
                 <option value="<?php echo $ta['id_thn_ajaran']; ?>"><?php echo $ta['nama_tahun_ajaran']; ?></option>
               <?php endforeach; ?>
@@ -33,8 +33,8 @@
             <label for="">Mata Pelajaran</label>
             <select id="sMapel" class="form-control" name="mapel" required="required">
               <!-- <option value="">Mata Pelajaran</option> -->
-              <option value="<?php if ($kode_mapel) { echo $kode_mapel; } ?>">
-              <?php if (empty($kode_mapel)) { echo 'Bidang Studi Tidak Tersedia'; }  else { echo $kode_mapel . ' | ' . $nama_mapel; } ?> </option>
+              <option value="<?php { echo $kode_mapel; } ?>">
+              <?php { echo $kode_mapel . ' | ' . $nama_mapel; } ?> </option>
             </select>
           </div>
         <button id="getRequestNilai" data-nip="<?php echo $nip; ?>" class="btn btn-lg btn-primary" style="margin-bottom: 20px;"><i class="fa fa-check"></i></button>

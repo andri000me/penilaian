@@ -15,9 +15,13 @@ class Data_nilai extends MY_Controller {
         // Base Sessions
         $data['myAccount']    = $this->session->userdata('nama_awal');
         $data['nip']          = $this->session->userdata('nip');
+        // $data['hak_akses']    = $this->session->userdata('hak_akses')
 
         // Get Content for filter
-        $data['kelas']        = $this -> a_model -> getKelas();
+
+        $data['kelas'] = $this -> a_model -> getKelasAll();
+        // $data['kelas'] = $this -> a_model -> getKelas($data['nip']);
+   
         $data['tahun_ajaran'] = $this -> a_model -> getTahunAjaran();
 
         // Select Mata Pelajaran
@@ -53,7 +57,6 @@ class Data_nilai extends MY_Controller {
         } else { /* 01 */
 
             $nis        = $this->input->post('nis');
-            echo var_dump($nis);
             $result     = array();
             foreach ($nis as $key => $value) {
                 $result[]   = array (
@@ -62,7 +65,7 @@ class Data_nilai extends MY_Controller {
                             'nip'            => $_POST['nip'][$key],
 
                             'mata_pelajaran' => $_POST['mapel'][$key],
-                            'tahun_ajaran'   => $_POST['id_thn_ajaran'][$key],
+                            'tahun_ajaran'   => $_POST['tahun_ajaran'][$key],
                             'semester'       => $_POST['semester'][$key],
 
                             'tugas'          => $_POST['tugas'][$key],
@@ -77,7 +80,7 @@ class Data_nilai extends MY_Controller {
                                                 ( $_POST['absensi'][$key] * 20/100 ) +
                                                 ( $_POST['norma'][$key] * 15/100 )
                 );  /* End Array */
-            } /* End Foreach */
+            } /* End Foreach */ 
          
 
             // Eksekusi -> Update Data Nilai
@@ -99,19 +102,19 @@ class Data_nilai extends MY_Controller {
     public function reqDataSiswa() {
 
         $data['nip']          = $this->input->get('nip');
-        $data['id_kelas']     = $this->input->get('id_kelas');
-        $data['id_thn_ajaran'] = $this->input->get('id_thn_ajaran');
+        $data['kelas']     = $this->input->get('kelas');
+        $data['tahun_ajaran'] = $this->input->get('tahun_ajaran');
         $data['semester']     = $this->input->get('semester');
-        $data['mapel']        = $this->input->get('kode_mapel');
+        $data['mapel']        = $this->input->get('mapel');
         $data['data_siswa']   = $this->db->select('*')->from('tabel_siswa')
-                                                      ->where('id_kelas', $data['id_kelas'])
+                                                      ->where('id_kelas', $data['kelas'])
                                                       ->get()->result();
-        
+
         foreach ($data['data_siswa'] as $x_nilai_by) {
             $resNilai = $this->db->select('*')
                 ->from('tabel_nilai')
                 ->where('nis', $x_nilai_by->nis)
-                ->where('tahun_ajaran', $data['id_thn_ajaran'])
+                ->where('tahun_ajaran', $data['tahun_ajaran'])
                 ->where('semester', $data['semester'])
                 ->where('mata_pelajaran', $data['mapel'])
                 ->where('nip', $data['nip'])
@@ -146,7 +149,7 @@ class Data_nilai extends MY_Controller {
                     $data['id_nilai']   = $this->db->select('id_nilai')
                                                    ->from('tabel_nilai')
                                                    ->where('nis', $x_nilai_by->nis)
-                                                   ->where('tahun_ajaran', $data['id_thn_ajaran'])
+                                                   ->where('tahun_ajaran', $data['tahun_ajaran'])
                                                    ->where('semester', $data['semester'])
                                                    ->where('mata_pelajaran', $data['mapel'])
                                                    ->where('nip', $data['nip'])

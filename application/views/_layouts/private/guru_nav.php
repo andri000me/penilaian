@@ -39,8 +39,8 @@
               <!-- <li class="divider"></li> -->
               <li><a href='<?php echo base_url();?>staff/data_nilai'><span>Input Nilai</span></a></li>
               <li class="divider"></li>
-              <li><a href='staff/setup-naik-kelas'>Kenaikan Kelas</a></li>
-              <li class="divider"></li>
+            <!--   <li><a href='staff/setup-naik-kelas'>Kenaikan Kelas</a></li>
+              <li class="divider"></li> -->
           </ul>
         </li>
 

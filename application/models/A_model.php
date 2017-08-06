@@ -86,8 +86,8 @@ class A_model extends CI_Model {
                       ->from   ('tabel_siswa')
                       ->join   ('kelas', 'tabel_siswa.id_kelas = kelas.id_kelas', 'left')
                       ->join   ('jurusan', 'kelas.id_jurusan = jurusan.id_jurusan', 'left')
-                      ->join   ('tahun_ajaran', 'tabel_siswa.angkatan = tahun_ajaran.id_thn_ajaran', 'left')
-                      ->join('users', 'users.id_user = tabel_siswa.id_user', 'left')
+                      ->join   ('tahun_ajaran', 'tabel_siswa.id_thn_ajaran = tahun_ajaran.id_thn_ajaran', 'left')
+                      ->join   ('users', 'users.id_user = tabel_siswa.id_user', 'left')
                       ->order_by ('nama_siswa', 'ASC')
                       ->get    ();
     return $query -> result_array();
@@ -101,7 +101,7 @@ class A_model extends CI_Model {
                          -> from ('tabel_siswa')
                          -> join ('kelas', 'tabel_siswa.id_kelas = kelas.id_kelas', 'left')
                          -> join   ('jurusan', 'kelas.id_jurusan = jurusan.id_jurusan', 'left')
-                         -> join   ('tahun_ajaran', 'tabel_siswa.angkatan = tahun_ajaran.id_thn_ajaran', 'left')
+                         -> join   ('tahun_ajaran', 'tabel_siswa.id_thn_ajaran = tahun_ajaran.id_thn_ajaran', 'left')
                          -> where ('nis', $param)
                          -> limit (1)
                          -> get   ();                       
@@ -110,15 +110,27 @@ class A_model extends CI_Model {
 
   // ------------------------------------------------------------
   // Get Kelas
-  function getKelas() {
+  function getKelas($nip = NULL) {
     // $query = $this->db->query('SELECT * FROM `kelas` ORDER BY `kelas`.`nama_kelas` ASC');
     // return $query->result_array();
       $query = $this->db->select ('*')
                       ->from   ('kelas')
                       ->join   ('jurusan', 'kelas.id_jurusan = jurusan.id_jurusan', 'left')
                       ->join   ('tabel_pengajar', 'kelas.wali_kelas = tabel_pengajar.nip', 'left')
-                      ->order_by ('nama_jurusan', 'ASC')
-                      ->limit (1)
+                      ->where ('kelas.wali_kelas', $nip)
+                      ->order_by ('nama_jurusan', 'ASC')                      
+                      ->get    ();
+    return $query -> result_array();
+  }
+
+    function getKelasAll() {
+    // $query = $this->db->query('SELECT * FROM `kelas` ORDER BY `kelas`.`nama_kelas` ASC');
+    // return $query->result_array();
+      $query = $this->db->select ('*')
+                      ->from   ('kelas')
+                      ->join   ('jurusan', 'kelas.id_jurusan = jurusan.id_jurusan', 'left')
+                      ->join   ('tabel_pengajar', 'kelas.wali_kelas = tabel_pengajar.nip', 'left')
+                      ->order_by ('nama_jurusan', 'ASC')                      
                       ->get    ();
     return $query -> result_array();
   }
@@ -136,7 +148,7 @@ class A_model extends CI_Model {
                       ->join   ('kelas', 'tabel_siswa.id_kelas = kelas.id_kelas', 'left')
                       ->join ('jurusan', 'kelas.id_jurusan = jurusan.id_jurusan', 'left')
                       ->join ('tabel_pengajar', 'kelas.wali_kelas = tabel_pengajar.nip', 'left')
-                      ->join ('tahun_ajaran', 'tabel_siswa.angkatan = tahun_ajaran.id_thn_ajaran')
+                      ->join ('tahun_ajaran', 'tabel_siswa.id_thn_ajaran = tahun_ajaran.id_thn_ajaran')
                       ->where ('nip', $nip)
                       ->order_by ('nama_jurusan', 'ASC')
                       ->get    ();
@@ -176,8 +188,12 @@ class A_model extends CI_Model {
   // ------------------------------------------------------------
   // Get Nama Wali Kelas
   function getNama_Wali_Kelas($kelas) {
-    $query = $this -> db -> where ('kelas_jurusan', $kelas)
-                         -> get   ('kelas');
+    $query = $this -> db  -> select ('*')
+                          -> from   ('kelas')
+                          -> join   ('tabel_pengajar', 'kelas.wali_kelas = tabel_pengajar.nip', 'left')
+                          -> join   ('jurusan', 'jurusan.id_jurusan = kelas.id_jurusan', 'left')
+                          -> where ('id_kelas', $kelas)
+                          -> get   ();
     return $query -> result_array();
   }
 
@@ -299,6 +315,7 @@ class A_model extends CI_Model {
     $query = $this->db->select('*')
                       ->from('tabel_nilai')
                       ->join('tabel_pengajar', 'tabel_pengajar.nip = tabel_nilai.nip', 'left')
+                      ->join('mata_pelajaran', 'tabel_nilai.mata_pelajaran = mata_pelajaran.kode_mapel')
                       ->where('tabel_nilai.nis', $nis)
                       ->where('tabel_nilai.tahun_ajaran', $s_ta)
                       ->where('tabel_nilai.semester', $semester)
@@ -313,10 +330,10 @@ class A_model extends CI_Model {
                       ->from('kelas')
                       ->join('tabel_siswa', 'tabel_siswa.id_kelas = kelas.id_kelas', 'left')
                       ->join('tabel_pengajar', 'tabel_pengajar.nip = kelas.wali_kelas', 'left')
-                      ->join('tahun_ajaran', 'tabel_siswa.angkatan = tahun_ajaran.id_thn_ajaran', 'left')
+                      ->join('tahun_ajaran', 'tabel_siswa.id_thn_ajaran = tahun_ajaran.id_thn_ajaran', 'left')
                       ->join('jurusan', 'kelas.id_jurusan = jurusan.id_jurusan', 'left')
                       ->where('tabel_pengajar.id_jabatan', 6)
-                      ->where('tabel_siswa.angkatan', $filter_tahun_ajaran)
+                      ->where('tabel_siswa.id_thn_ajaran', $filter_tahun_ajaran)
                       ->get();
     return $query -> result_array();
   }
